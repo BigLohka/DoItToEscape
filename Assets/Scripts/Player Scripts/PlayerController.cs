@@ -28,7 +28,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask ground;
 
-
+    [Header("Weapons")]
+    [SerializeField]
+    private GameObject bullet;
+    [SerializeField]
+    private Transform shootPoint;
+    [SerializeField]
+    private float timeBtwShoots;
+    [SerializeField]
+    private float startTimeBetweenShoots;
 
 
     private void Start()
@@ -53,6 +61,7 @@ public class PlayerController : MonoBehaviour
         posFlip = mainCamera.WorldToScreenPoint(transform.position);
         //Конец скрипта
 
+        Shoot();
     }
 
     private void CharacterMoving() // движение игрока
@@ -84,5 +93,21 @@ public class PlayerController : MonoBehaviour
     private void CheckingGround()
     {
         onGround = Physics2D.OverlapCircle(groundCheck.position, checkRadius, ground);
+    }
+
+    private void Shoot()
+    {
+        if (timeBtwShoots <= 0)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Instantiate(bullet, shootPoint.position, transform.rotation);
+                timeBtwShoots = startTimeBetweenShoots;
+            }
+        }
+        else
+        {
+            timeBtwShoots -= Time.deltaTime;
+        }
     }
 }

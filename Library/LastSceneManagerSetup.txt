@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Proportion test.unity
+=======
+- path: Assets/Scenes/SampleScene.unity
+>>>>>>> 1736969bed73188a0e0c8af5a30d43d6a7d08755
   isLoaded: 1
   isActive: 1
   isSubScene: 0

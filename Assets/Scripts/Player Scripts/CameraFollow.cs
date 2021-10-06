@@ -11,6 +11,13 @@ public class CameraFollow : MonoBehaviour
     private string playerTag;
     [SerializeField]
     private float movingSpeed;
+    [SerializeField]
+    private int xOffset;
+    [SerializeField]
+    private int yOffset;
+    [SerializeField]
+    private int zOffset;
+
 
     private void Awake()
     {
@@ -26,9 +33,9 @@ public class CameraFollow : MonoBehaviour
 
         this.transform.position = new Vector3()
         {
-            x = this.playerTransform.position.x,
-            y = this.playerTransform.position.y,
-            z = this.playerTransform.position.z - 10,
+            x = this.playerTransform.position.x + xOffset,
+            y = this.playerTransform.position.y + yOffset,
+            z = this.playerTransform.position.z - zOffset,
         };
     }
 
@@ -38,9 +45,9 @@ public class CameraFollow : MonoBehaviour
         {
             Vector3 target = new Vector3()
             {
-                x = this.playerTransform.position.x,
-                y = this.playerTransform.position.y,
-                z = this.playerTransform.position.z - 10,
+                x = this.playerTransform.position.x + xOffset,
+                y = this.playerTransform.position.y + yOffset,
+                z = this.playerTransform.position.z - zOffset,
             };
 
             Vector3 pos = Vector3.Lerp(this.transform.position, target, this.movingSpeed * Time.deltaTime);

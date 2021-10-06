@@ -6,8 +6,20 @@ public class CursoreRotation : MonoBehaviour
 {
     [SerializeField]
     private float offset; // смещение по прицелу
+
+
+    [Header("Weapons")]
+    [SerializeField]
+    private GameObject bullet;
+    [SerializeField]
+    private Transform shootPoint;
+    [SerializeField]
+    private float timeBtwShoots;
+    [SerializeField]
+    private float startTimeBetweenShoots;
     void Start()
     {
+
     }
 
     void Update()
@@ -17,17 +29,24 @@ public class CursoreRotation : MonoBehaviour
         float rotateZ = Mathf.Atan2(diffrence.y, diffrence.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, rotateZ + offset);
 
-        Vector3 localScale = Vector3.one; // разворот персонажа
+        Shoot();
+    }
 
-        if (rotateZ > 90 || rotateZ < 90)
-        { localScale.y = -1f; }
+    private void Shoot()
+    {
+
+
+        if (timeBtwShoots <= 0)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Instantiate(bullet, shootPoint.position, transform.rotation);
+                timeBtwShoots = startTimeBetweenShoots;
+            }
+        }
         else
-        { localScale.y = +1f; }
-
-        transform.localScale = localScale;
-
-        // Конец Скрипта
-
-
+        {
+            timeBtwShoots -= Time.deltaTime;
+        }
     }
 }
